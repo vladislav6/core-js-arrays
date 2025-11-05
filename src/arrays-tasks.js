@@ -37,8 +37,23 @@ function getIntervalArray(/* start, end */) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  const result = [];
+  if (arr1.length !== arr2.length) {
+    const biggerArr = arr1.length > arr2.length ? arr1 : arr2;
+    const lessArr = arr1.length > arr2.length ? arr2 : arr1;
+    biggerArr.map((val, ind) => {
+      if (typeof lessArr[ind] === 'undefined') {
+        lessArr[ind] = 0;
+      }
+      return result.push(val + lessArr[ind]);
+    });
+  } else {
+    arr1.map((val, ind) => {
+      return result.push(val + arr2[ind]);
+    });
+  }
+  return result;
 }
 
 /**
@@ -108,8 +123,12 @@ function removeFalsyValues(arr) {
  *    getStringsLength([ '', 'a', 'bc', 'def', 'ghij' ]) => [ 0, 1, 2, 3, 4 ]
  *    getStringsLength([ 'angular', 'react', 'ember' ]) => [ 7, 5, 5 ]
  */
-function getStringsLength(/* arr */) {
-  throw new Error('Not implemented');
+function getStringsLength(arr) {
+  const result = [];
+  arr.map((val) => {
+    return result.push(val.length);
+  });
+  return result;
 }
 
 /**
@@ -126,8 +145,13 @@ function getStringsLength(/* arr */) {
  *   getAverage([ 1, 10, 100, 1000 ])  => 277,75
  *   getAverage([ 2, 3, 3 ])  => 2,67
  */
-function getAverage(/* arr */) {
-  throw new Error('Not implemented');
+function getAverage(arr) {
+  let result = 0;
+  result = arr.reduce((acc, val) => acc + val / arr.length, 0);
+  if (!Number.isInteger(result)) {
+    result = result.toFixed(2);
+  }
+  return Number(result);
 }
 
 /**
